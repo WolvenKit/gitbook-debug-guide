@@ -4,33 +4,8 @@ import {
   FetchEventCallback,
   RuntimeContext,
 } from "@gitbook/runtime";
-import YAML from "yaml";
-
-const defaultContent = `---
-start:
-  title: What platform do you have the game from?
-  options:
-    - label: Steam
-      target: success
-    - label: GoG
-      target: success
-    - label: Not allowed to say
-      target: pirate
-    - label: Other
-      target: pirate
-
-success:
-  title: Game is good, yay!
-
-pirate:
-  title: "?rule3"
-`;
-
-interface Step {
-  title: string;
-  options?: { label: string; target: string }[];
-}
-type Content = Record<string, Step>;
+import { Content, defaultContent, loadContent } from "./data";
+import { createGuide } from "./guide";
 
 type IntegrationContext = {} & RuntimeContext;
 type IntegrationBlockProps = { content: string };
@@ -72,60 +47,65 @@ const guideBlock = createComponent<
     }
     const { context, state } = element;
     const { editable } = context;
-    let parsedContent: Content | null = null;
 
-    try {
-      parsedContent = YAML.parse(state.content);
-    } catch (e) {
-      console.log(e);
-      // TODO:
+    let parsedContent: Content | null = null;
+    let error: string | null = null;
+
+    const result = loadContent(state.content);
+    if (typeof result === "string") {
+      error = result;
+    } else {
+      parsedContent = result;
     }
 
     const step = parsedContent?.[state.currentStep];
 
-    // element.setCache({
-    //   maxAge: 86400,
-    // });
+    element.setCache({
+      maxAge: 0,
+    });
 
-    const output = (
-      <box>
-        {step
-          ? [
-              <markdown content={"## " + step.title} />,
-              ...(step.options?.map((button) => (
-                <button
-                  label={button.label}
-                  onPress={{
-                    action: "click",
-                    step: button.target,
-                  }}
-                />
-              )) ?? []),
-            ]
-          : null}
-      </box>
-    );
-
-    return (
-      <block>
-        {editable ? (
-          <codeblock
-            state="content"
-            content={state.content}
-            syntax="yaml"
-            onContentChange={{
-              action: "@editor.node.updateProps",
-              props: {
-                content: element.dynamicState("content"),
-              },
+    // Make sure there is a way to get out of non-existing step (for whatever reason)
+    const getGuide = () =>
+      step ? (
+        createGuide(step)
+      ) : (
+        <vstack>
+          <markdown content="## An error has occurred, please press the button bellow." />
+          <button
+            label="Reset / Try again"
+            onPress={{
+              action: "click",
+              step: "start",
             }}
-            footer={[output]}
           />
-        ) : (
-          output
-        )}
-      </block>
+        </vstack>
+      );
+
+    const getEditor = () => (
+      <codeblock
+        state="content"
+        content={state.content}
+        header={[<markdown content="## Debug Guide" />]}
+        syntax="yaml"
+        onContentChange={{
+          action: "@editor.node.updateProps",
+          props: {
+            content: element.dynamicState("content"),
+          },
+        }}
+        footer={[step ? getGuide() : <text style="code">{error}</text>]}
+      />
     );
+
+    // Don't show errors to users
+    const getFrontend = () =>
+      error ? (
+        <markdown content="# Error!\nDebug Guide is misconfigured.\nPlease contact authors of this wiki!" />
+      ) : (
+        getGuide()
+      );
+
+    return <block>{editable ? getEditor() : getFrontend()}</block>;
   },
 });
 

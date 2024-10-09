@@ -9,12 +9,12 @@
     "publish": "gitbook publish"
   },
   "dependencies": {
-    "@gitbook/runtime": "*",
+    "@gitbook/runtime": "^0.15.0",
     "yaml": "^2.5.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241004.0",
     "@gitbook/cli": "^0.18.1",
-    "@gitbook/tsconfig": "*"
+    "@gitbook/tsconfig": "^0.1.0"
   }
 }

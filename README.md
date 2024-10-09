@@ -1,4 +1,4 @@
-# gitbook-debug-guide
+# Guided Meditation
 A guiding system as an Integration in Gitbook.
 
 

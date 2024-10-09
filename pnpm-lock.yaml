@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@gitbook/runtime':
-        specifier: '*'
+        specifier: ^0.15.0
         version: 0.15.0
       yaml:
         specifier: ^2.5.1
@@ -22,7 +22,7 @@ importers:
         specifier: ^0.18.1
         version: 0.18.1
       '@gitbook/tsconfig':
-        specifier: '*'
+        specifier: ^0.1.0
         version: 0.1.0
 
 packages:

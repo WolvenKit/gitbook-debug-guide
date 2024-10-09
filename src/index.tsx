@@ -64,6 +64,34 @@ const guideBlock = createComponent<
       maxAge: 0,
     });
 
+    /// EDITOR
+    const getEditor = () => (
+      <codeblock
+        state="content"
+        content={state.content}
+        header={[<markdown content="## Debug Guide" />]}
+        syntax="yaml"
+        onContentChange={{
+          action: "@editor.node.updateProps",
+          props: {
+            content: element.dynamicState("content"),
+          },
+        }}
+        footer={[
+          <divider />,
+          error ? (
+            <vstack align="center">
+              <text style="code">{error}</text>
+            </vstack>
+          ) : (
+            createGuide(step)
+          ),
+        ]}
+      />
+    );
+
+    // FRONTEND
+
     // Make sure there is a way to get out of non-existing step (for whatever reason)
     const getGuide = () =>
       step ? (
@@ -81,25 +109,9 @@ const guideBlock = createComponent<
         </vstack>
       );
 
-    const getEditor = () => (
-      <codeblock
-        state="content"
-        content={state.content}
-        header={[<markdown content="## Debug Guide" />]}
-        syntax="yaml"
-        onContentChange={{
-          action: "@editor.node.updateProps",
-          props: {
-            content: element.dynamicState("content"),
-          },
-        }}
-        footer={[step ? getGuide() : <text style="code">{error}</text>]}
-      />
-    );
-
-    // Don't show errors to users
     const getFrontend = () =>
       error ? (
+        // Don't show errors to users
         <markdown content="# Error!\nDebug Guide is misconfigured.\nPlease contact authors of this wiki!" />
       ) : (
         getGuide()

@@ -14,7 +14,7 @@ export const defaultContent = `# This YAML defines how Debug Guide behaves.
 start:
   title: What platform do you have the game from?
   description: |- # You can use markdown here
-    This is an ***important*** information if you need __help__.
+    This is an ***important*** information if you need help.
   options:
     - label: Steam
       target: success # target is the next step
@@ -77,15 +77,14 @@ function validateData(data: Content) {
       for (let i = 0; i < step.options.length; i++) {
         const option = step.options[i];
 
-        const optionName = `Option ${i} of step '${name}'`;
         if (!ensure(option, "label")) {
-          throw `${optionName} is missing a label!`;
+          throw `Option ${i} of step '${name}' is missing a label!`;
         }
         if (!ensure(option, "target")) {
-          throw `${optionName} is missing a target!`;
+          throw `Option ${i} ('${option.label}') of step '${name}' is missing a target!`;
         }
         if (!ensure(data, option.target)) {
-          throw `${optionName} is targeting step ${option.target}, which does not exist!`;
+          throw `Option ${i} ('${option.label}') of step '${name}' is targeting step '${option.target}', which does not exist!`;
         }
       }
     }

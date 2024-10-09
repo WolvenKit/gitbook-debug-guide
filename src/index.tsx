@@ -26,6 +26,12 @@ pirate:
   title: "?rule3"
 `;
 
+interface Step {
+  title: string;
+  options?: { label: string; target: string }[];
+}
+type Content = Record<string, Step>;
+
 type IntegrationContext = {} & RuntimeContext;
 type IntegrationBlockProps = { content: string };
 type IntegrationBlockState = { content: string; currentStep: string };
@@ -48,25 +54,25 @@ const guideBlock = createComponent<
   IntegrationContext
 >({
   componentId: "debugguide",
-  initialState: (props) => {
+  initialState(props) {
     return {
       content: props.content || defaultContent,
       currentStep: "start",
     };
   },
-  action: async (element, action, context) => {
+  async action(element, action) {
     switch (action.action) {
       case "click":
         return { state: { ...element.state, currentStep: action.step } };
     }
   },
-  render: async (element, { environment }) => {
+  async render(element, { environment }) {
     if (element.context.type !== "document") {
       throw new Error("Invalid context");
     }
     const { context, state } = element;
     const { editable } = context;
-    let parsedContent;
+    let parsedContent: Content | null = null;
 
     try {
       parsedContent = JSON.parse(state.content);
@@ -76,22 +82,26 @@ const guideBlock = createComponent<
 
     const step = parsedContent[state.currentStep];
 
-    element.setCache({
-      maxAge: 86400,
-    });
+    // element.setCache({
+    //   maxAge: 86400,
+    // });
 
     const output = (
       <box>
-        <markdown content={"## " + step.title} />
-        {step.buttons?.map((button) => (
-          <button
-            label={button.label}
-            onPress={{
-              action: "click",
-              step: button.target,
-            }}
-          />
-        ))}
+        {step
+          ? [
+              <markdown content={"## " + step.title} />,
+              ...(step.options?.map((button) => (
+                <button
+                  label={button.label}
+                  onPress={{
+                    action: "click",
+                    step: button.target,
+                  }}
+                />
+              )) ?? []),
+            ]
+          : null}
       </box>
     );
 

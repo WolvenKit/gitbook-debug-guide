@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "publish": "gitbook publish ."
+    "dev": "gitbook dev",
+    "publish": "gitbook publish"
   },
   "dependencies": {
     "@gitbook/runtime": "*",

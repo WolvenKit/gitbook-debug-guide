@@ -8,7 +8,7 @@ import YAML from "yaml";
 
 const defaultContent = `---
 start:
-  title: What platform do you have the game from? :cat_hmm2:
+  title: What platform do you have the game from?
   options:
     - label: Steam
       target: success
@@ -75,12 +75,13 @@ const guideBlock = createComponent<
     let parsedContent: Content | null = null;
 
     try {
-      parsedContent = JSON.parse(state.content);
+      parsedContent = YAML.parse(state.content);
     } catch (e) {
+      console.log(e);
       // TODO:
     }
 
-    const step = parsedContent[state.currentStep];
+    const step = parsedContent?.[state.currentStep];
 
     // element.setCache({
     //   maxAge: 86400,

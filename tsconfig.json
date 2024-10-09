@@ -1,0 +1,7 @@
+{
+    "extends": "@gitbook/tsconfig/integration.json",
+    "compilerOptions": {
+        "moduleResolution": "Bundler",
+        "module": "Preserve"
+    }
+}

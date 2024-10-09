@@ -1,0 +1,19 @@
+{
+  "name": "gitbook-debugguide",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "publish": "gitbook publish ."
+  },
+  "dependencies": {
+    "@gitbook/runtime": "*",
+    "yaml": "^2.5.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241004.0",
+    "@gitbook/cli": "^0.18.1",
+    "@gitbook/tsconfig": "*"
+  }
+}

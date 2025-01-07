@@ -9,7 +9,7 @@ import { createGuide } from "./guide";
 
 type IntegrationContext = {} & RuntimeContext;
 type IntegrationBlockProps = { content: string };
-type IntegrationBlockState = { content: string; currentStep: string };
+type IntegrationBlockState = { content: string; stepHistory: string[] };
 type IntegrationAction = { action: "click"; step: string };
 
 const handleFetchEvent: FetchEventCallback<IntegrationContext> = async (
@@ -32,13 +32,27 @@ const guideBlock = createComponent<
   initialState(props) {
     return {
       content: props.content || defaultContent,
-      currentStep: "start",
+      stepHistory: ["start"],
     };
   },
   async action(element, action) {
     switch (action.action) {
       case "click":
-        return { state: { ...element.state, currentStep: action.step } };
+        if (action.step == "_back") {
+          return {
+            state: {
+              ...element.state,
+              stepHistory: element.state.stepHistory.slice(0, -1),
+            },
+          };
+        }
+
+        return {
+          state: {
+            ...element.state,
+            stepHistory: [...element.state.stepHistory, action.step],
+          },
+        };
     }
   },
   async render(element, { environment }) {
@@ -58,7 +72,11 @@ const guideBlock = createComponent<
       parsedContent = result;
     }
 
-    const step = parsedContent?.[state.currentStep];
+    const historyLength = state.stepHistory.length;
+    const currentStepName = state.stepHistory[historyLength - 1];
+    const step = parsedContent?.[currentStepName];
+
+    const showBack = !step.hide_back && historyLength > 1;
 
     element.setCache({
       maxAge: 0,
@@ -84,7 +102,7 @@ const guideBlock = createComponent<
               <text style="code">{error}</text>
             </vstack>
           ) : (
-            createGuide(step)
+            createGuide(step, showBack)
           ),
         ]}
       />
@@ -95,7 +113,7 @@ const guideBlock = createComponent<
     // Make sure there is a way to get out of non-existing step (for whatever reason)
     const getGuide = () =>
       step ? (
-        createGuide(step)
+        createGuide(step, showBack)
       ) : (
         <vstack>
           <markdown content="## An error has occurred, please press the button bellow." />

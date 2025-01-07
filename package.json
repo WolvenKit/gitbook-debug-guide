@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@gitbook/runtime": "^0.15.0",
-    "yaml": "^2.5.1"
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241004.0",
+    "@cloudflare/workers-types": "^4.20241230.0",
     "@gitbook/cli": "^0.18.1",
     "@gitbook/tsconfig": "^0.1.0"
   }

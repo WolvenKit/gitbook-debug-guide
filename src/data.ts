@@ -3,6 +3,7 @@ import YAML from "yaml";
 export interface Step {
   title: string;
   description?: string;
+  hide_back?: boolean;
   options?: { label: string; target: string }[];
 }
 

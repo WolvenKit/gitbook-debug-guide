@@ -5,16 +5,16 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "dev": "gitbook dev",
+    "dev": "gitbook dev MgwPytcJVspMKYpNoUaS",
     "publish": "gitbook publish"
   },
   "dependencies": {
-    "@gitbook/runtime": "^0.15.0",
+    "@gitbook/runtime": "^0.17.0",
     "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241230.0",
-    "@gitbook/cli": "^0.18.1",
+    "@gitbook/cli": "^0.19.0",
     "@gitbook/tsconfig": "^0.1.0"
   }
 }

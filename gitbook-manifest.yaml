@@ -1,7 +1,7 @@
 name: debugguide
 title: Debug Guide
+description: A guiding system as an Integration in Gitbook.
 script: src/index.tsx
-description: ""
 scopes: []
 blocks:
   - id: debugguide

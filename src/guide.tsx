@@ -1,4 +1,4 @@
-import { Step } from "./data";
+import { Step } from "../common/data";
 
 export function createGuide(step: Step, showBack: boolean) {
   const options = step.options;
@@ -12,7 +12,7 @@ export function createGuide(step: Step, showBack: boolean) {
   if (!options) {
     options.push({
       label: "Restart...",
-      target: "start",
+      target: "_restart",
     });
   }
 

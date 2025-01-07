@@ -4,12 +4,13 @@ import {
   FetchEventCallback,
   RuntimeContext,
 } from "@gitbook/runtime";
-import { Content, defaultContent, loadContent } from "./data";
+import { Content, defaultContent, loadContent } from "../common/data";
 import { createGuide } from "./guide";
+import { doClickActionState } from "../common/action";
 
 type IntegrationContext = {} & RuntimeContext;
 type IntegrationBlockProps = { content: string };
-type IntegrationBlockState = { content: string; stepHistory: string[] };
+export type IntegrationBlockState = { content: string; stepHistory: string[] };
 type IntegrationAction = { action: "click"; step: string };
 
 const handleFetchEvent: FetchEventCallback<IntegrationContext> = async (
@@ -38,21 +39,7 @@ const guideBlock = createComponent<
   async action(element, action) {
     switch (action.action) {
       case "click":
-        if (action.step == "_back") {
-          return {
-            state: {
-              ...element.state,
-              stepHistory: element.state.stepHistory.slice(0, -1),
-            },
-          };
-        }
-
-        return {
-          state: {
-            ...element.state,
-            stepHistory: [...element.state.stepHistory, action.step],
-          },
-        };
+        return { state: doClickActionState(element.state, action) };
     }
   },
   async render(element, { environment }) {
@@ -136,6 +123,16 @@ const guideBlock = createComponent<
       );
 
     return <block>{editable ? getEditor() : getFrontend()}</block>;
+    // return (
+    //   <block>
+    //     <webframe
+    //       source={{
+    //         url: "https://static.zhincore.eu/images/jinxwashere.png",
+    //       }}
+    //       aspectRatio={16 / 9}
+    //     ></webframe>
+    //   </block>
+    // );
   },
 });
 

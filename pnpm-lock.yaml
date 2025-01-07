@@ -27,6 +27,9 @@ importers:
 
   widget:
     dependencies:
+      devalue:
+        specifier: ^5.1.1
+        version: 5.1.1
       solid-js:
         specifier: ^1.9.3
         version: 1.9.3
@@ -775,6 +778,9 @@ packages:
   dequal@2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
+
+  devalue@5.1.1:
+    resolution: {integrity: sha512-maua5KUiapvEwiEAe+XnlZ3Rh0GD+qI1J/nb9vrJc3muPXvcF/8gXYTWF76+5DAqHyDUtOIImEuo0YKE9mshVw==}
 
   diff@5.2.0:
     resolution: {integrity: sha512-uIFDxqpRZGZ6ThOk84hEfqWoHx2devRFvpTZcTHur85vImfaxUbTW9Ryh4CpCuDnToOP1CEtXKIgytHBPVff5A==}
@@ -2027,6 +2033,8 @@ snapshots:
       clone: 1.0.4
 
   dequal@2.0.3: {}
+
+  devalue@5.1.1: {}
 
   diff@5.2.0: {}
 

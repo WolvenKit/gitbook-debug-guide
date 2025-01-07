@@ -43,86 +43,97 @@ const guideBlock = createComponent<
     }
   },
   async render(element, { environment }) {
-    if (element.context.type !== "document") {
-      throw new Error("Invalid context");
-    }
-    const { context, state } = element;
-    const { editable } = context;
-
-    let parsedContent: Content | null = null;
-    let error: string | null = null;
-
-    const result = loadContent(state.content);
-    if (typeof result === "string") {
-      error = result;
-    } else {
-      parsedContent = result;
-    }
-
-    const historyLength = state.stepHistory.length;
-    const currentStepName = state.stepHistory[historyLength - 1];
-    const step = parsedContent?.[currentStepName];
-
-    const showBack = !step.hide_back && historyLength > 1;
-
-    element.setCache({
-      maxAge: 0,
-    });
-
-    /// EDITOR
-    const getEditor = () => (
-      <codeblock
-        state="content"
-        content={state.content}
-        header={[<markdown content="## Debug Guide" />]}
-        syntax="yaml"
-        onContentChange={{
-          action: "@editor.node.updateProps",
-          props: {
-            content: element.dynamicState("content"),
-          },
-        }}
-        footer={[
-          <divider />,
-          error ? (
-            <vstack align="center">
-              <text style="code">{error}</text>
-            </vstack>
-          ) : (
-            createGuide(step, showBack)
-          ),
-        ]}
-      />
+    return (
+      <block>
+        <webframe
+          source={{
+            url: "https://wolvenkit.github.io/gitbook-debug-guide/",
+          }}
+          aspectRatio={16 / 9}
+        />
+      </block>
     );
 
-    // FRONTEND
+    // if (element.context.type !== "document") {
+    //   throw new Error("Invalid context");
+    // }
+    // const { context, state } = element;
+    // const { editable } = context;
 
-    // Make sure there is a way to get out of non-existing step (for whatever reason)
-    const getGuide = () =>
-      step ? (
-        createGuide(step, showBack)
-      ) : (
-        <vstack>
-          <markdown content="## An error has occurred, please press the button bellow." />
-          <button
-            label="Reset / Try again"
-            onPress={{
-              action: "click",
-              step: "start",
-            }}
-          />
-        </vstack>
-      );
+    // let parsedContent: Content | null = null;
+    // let error: string | null = null;
 
-    const getFrontend = () =>
-      error ? (
-        // Don't show errors to users
-        <markdown content="# Error!\nDebug Guide is misconfigured.\nPlease contact authors of this wiki!" />
-      ) : (
-        getGuide()
-      );
+    // const result = loadContent(state.content);
+    // if (typeof result === "string") {
+    //   error = result;
+    // } else {
+    //   parsedContent = result;
+    // }
 
-    return <block>{editable ? getEditor() : getFrontend()}</block>;
+    // const historyLength = state.stepHistory.length;
+    // const currentStepName = state.stepHistory[historyLength - 1];
+    // const step = parsedContent?.[currentStepName];
+
+    // const showBack = !step.hide_back && historyLength > 1;
+
+    // element.setCache({
+    //   maxAge: 0,
+    // });
+
+    // /// EDITOR
+    // const getEditor = () => (
+    //   <codeblock
+    //     state="content"
+    //     content={state.content}
+    //     header={[<markdown content="## Debug Guide" />]}
+    //     syntax="yaml"
+    //     onContentChange={{
+    //       action: "@editor.node.updateProps",
+    //       props: {
+    //         content: element.dynamicState("content"),
+    //       },
+    //     }}
+    //     footer={[
+    //       <divider />,
+    //       error ? (
+    //         <vstack align="center">
+    //           <text style="code">{error}</text>
+    //         </vstack>
+    //       ) : (
+    //         createGuide(step, showBack, element.dynamicState("content"))
+    //       ),
+    //     ]}
+    //   />
+    // );
+
+    // // FRONTEND
+
+    // // Make sure there is a way to get out of non-existing step (for whatever reason)
+    // const getGuide = () =>
+    //   step ? (
+    //     createGuide(step, showBack, element.dynamicState("content"))
+    //   ) : (
+    //     <vstack>
+    //       <markdown content="## An error has occurred, please press the button bellow." />
+    //       <button
+    //         label="Reset / Try again"
+    //         onPress={{
+    //           action: "click",
+    //           step: "start",
+    //         }}
+    //       />
+    //     </vstack>
+    //   );
+
+    // const getFrontend = () =>
+    //   error ? (
+    //     // Don't show errors to users
+    //     <markdown content="# Error!\nDebug Guide is misconfigured.\nPlease contact authors of this wiki!" />
+    //   ) : (
+    //     getGuide()
+    //   );
+
+    // return <block>{editable ? getEditor() : getFrontend()}</block>;
   },
 });
 

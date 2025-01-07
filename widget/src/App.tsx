@@ -1,34 +1,25 @@
 import { createSignal } from "solid-js";
-import { StepPage, StepPageProps } from "./StepPage";
-import { ClickAction } from "../../common/action";
+import contentRaw from "../guide.yaml";
+import { Content } from "../../common/data";
+import { Guide } from "./Guide";
+import { doClickActionState } from "../../common/action";
 
-export function App() {
-  const [state, setState] = createSignal<StepPageProps>();
+const content = contentRaw as Content;
 
-  window.addEventListener("message", (event) => {
-    if (event.data?.state?.data) {
-      setState(JSON.parse(event.data.state.data));
-    }
-  });
-
-  if (state()) {
-    return (
-      <StepPage
-        {...state()!}
-        onAction={(step) => doAction({ step })}
-      ></StepPage>
-    );
-  }
+interface AppState {
+  stepHistory: string[];
 }
 
-function doAction(action: ClickAction) {
-  window.parent.postMessage(
-    {
-      action: {
-        type: "click",
-        ...action,
-      },
-    },
-    "*"
+export function App() {
+  const [state, setState] = createSignal<AppState>({
+    stepHistory: ["start"],
+  });
+
+  return (
+    <Guide
+      content={content}
+      stepHistory={state().stepHistory}
+      onAction={(step) => setState(doClickActionState(state(), { step }))}
+    />
   );
 }

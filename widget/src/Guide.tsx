@@ -1,52 +1,20 @@
-import { createMemo, For, Show } from "solid-js";
-import { SolidMarkdown } from "solid-markdown";
-import { Button } from "./Button";
-import type { Step } from "../../common/data";
+import type { Content } from "../../common/data";
+import { StepPage } from "./StepPage";
 
-interface StepPageProps {
-  step: Step;
-  showBack: boolean;
+interface GuideProps {
+  stepHistory: string[];
+  content: Content;
   onAction?: (target: string) => void;
 }
 
-export function Guide(props: StepPageProps) {
-  const options = createMemo(() => {
-    const options = [...(props.step.options ?? [])];
+export function Guide(props: GuideProps) {
+  const historyLength = () => props.stepHistory.length;
+  const currentStepName = () => props.stepHistory[historyLength() - 1];
+  const step = () => props.content[currentStepName()];
 
-    if (options.length && props.showBack) {
-      options.push({
-        label: "Go back",
-        target: "_back",
-      });
-    }
-
-    if (!options.length) {
-      options.push({
-        label: "Restart...",
-        target: "_restart",
-      });
-    }
-
-    return options;
-  });
+  const showBack = () => !step().hide_back && historyLength() > 1;
 
   return (
-    <div>
-      <h1>{props.step.title}</h1>
-
-      <Show when={props.step.description}>
-        <SolidMarkdown children={props.step.description} />
-      </Show>
-
-      <div class="button-list">
-        <For each={options()}>
-          {(option) => (
-            <Button onClick={() => props.onAction?.(option.target)}>
-              {option.label}
-            </Button>
-          )}
-        </For>
-      </div>
-    </div>
+    <StepPage showBack={showBack()} step={step()} onAction={props.onAction} />
   );
 }

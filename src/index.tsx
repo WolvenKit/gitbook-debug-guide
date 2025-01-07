@@ -123,16 +123,6 @@ const guideBlock = createComponent<
       );
 
     return <block>{editable ? getEditor() : getFrontend()}</block>;
-    // return (
-    //   <block>
-    //     <webframe
-    //       source={{
-    //         url: "https://static.zhincore.eu/images/jinxwashere.png",
-    //       }}
-    //       aspectRatio={16 / 9}
-    //     ></webframe>
-    //   </block>
-    // );
   },
 });
 

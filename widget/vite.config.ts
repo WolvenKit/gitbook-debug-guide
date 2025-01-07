@@ -6,5 +6,5 @@ export default defineConfig({
   optimizeDeps: {
     include: ["micromark", "unified"],
   },
-  
+  base: "",
 });

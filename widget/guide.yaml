@@ -258,11 +258,10 @@ crashing_red4ext_02:
     You have a problem with Red4Ext (or one of its dependencies), and neither updating them nor updating VisualC fixed it.     
     Now it's time to check the log files.
 
-    Find the most recent file under:
-    `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\red4ext\logs`
-    and open it in a text editor. 
-
-    Look out for lines with `[error]`, then try to resolve the problems. 
+    - Go to your [Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)
+    - Go to the subfolder `red4ext\logs`
+    - Find the most recently changed file, and open it with a text editor such as [Notepad++](https://notepad-plus-plus.org/downloads)
+    - Look out for lines with `[error]`, then try to resolve the problems. 
 
     If you need help, you can check [this wiki page](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/user-guide-troubleshooting/finding-and-reading-log-files#making-sense-of-them) or [find us on Discord](https://discord.gg/redmodding) in the mod-troubleshooting channel.
 
@@ -310,9 +309,9 @@ crashing_archive_mod:
   title: A broken item
   description: |-
     The game is trying to load a broken **item** and is crashing when trying to spawn it into the world. 
-    In the next step, we'll find out which item it is. You need to examine the following folders:
-    - `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\archive\pc\mod`
-    - `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\mods` (it can be empty)
+    In the next step, we'll find out which item it is. You need to examine the following folders inside your [Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory):
+    - `\archive\pc\mod`
+    - `\mods` (it can be empty)
   options:
     - label: OK!
       target: bisect_known_folder_start
@@ -326,9 +325,9 @@ crashing_script_mod_start:
     At some point during your gameplay, a script mod is trying to do something that makes the game crash. 
     Unfortunately, there won't be any log files to help you, but 
 
-    In the next step, we'll find out which script mod it is. You need to examine the following folders:
-    - `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\r6\scripts`
-    - `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\bin\x64\plugins\cyber_engine_tweaks\mods`
+    In the next step, we'll find out which script mod it is. You need to examine the following folders inside your [Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory):
+    - `\r6\scripts`
+    - `\bin\x64\plugins\cyber_engine_tweaks\mods`
 
   options:
     - label: OK!
@@ -400,8 +399,8 @@ crashing_random_mto:
 crashing_cet_01:
   title: You have a problem with a CET mod
   description: |-
-    Your problem sits in the following folder:     
-    `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\bin\x64\plugins\cyber_engine_tweaks\mods`
+    Your problem sits in the following folder inside your [Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory):     
+    `bin\x64\plugins\cyber_engine_tweaks\mods`
     Open Windows Explorer and rename the folder to mods_. Does your game start now?
 
     If you need help, you can check [this wiki page](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/user-guide-troubleshooting/finding-and-reading-log-files#making-sense-of-them) or [find us on Discord](https://discord.gg/redmodding) in the mod-troubleshooting channel.
@@ -438,9 +437,10 @@ crashing_reinstall_cet:
 crashing_reinstall_cet_move_mods:
   title: Move the mods from your backup
   description: |-
-    Now that CET is starting again, let's get your mods back.
-    - From the old folder `plugins_`, move the `mods_` folder to your new CET install under `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\bin\x64\plugins\cyber_engine_tweaks`
-    - You can delete plugins_ now
+    Now that CET is starting again, let's get your mods back. 
+    - Go to your [Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)
+    - From the old folder `plugins_`, move the `mods_` folder to your new CET install under `\bin\x64\plugins\cyber_engine_tweaks`
+    - You can delete `plugins_` now
     - Rename the folder `mods_` in CET's directory to `mods` and start the game. Does it work?
   options:
     - label: Yes!
@@ -522,11 +522,11 @@ bisect_start:
     You can find step-by-step instructions on the [wiki page](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/user-guide-troubleshooting#bisect-video-demonstration).
     If you are a visual learner, you will find a short video at the end of the section.
 
-    You have to examine the following folders:
-    - `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\archive\pc\mod`
-    - `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\r6\scripts`
-    - `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\r6\tweaks`
-    - `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\bin\x64\plugins\cyber_engine_tweaks\mods`
+    You have to examine the following folders inside your [Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory):
+    - `archive\pc\mod`
+    - `r6\scripts`
+    - `r6\tweaks`
+    - `bin\x64\plugins\cyber_engine_tweaks\mods`
 
   options:
     - label: Sounds scary, but I'll do it
@@ -537,8 +537,9 @@ bisect_start:
 bisect_cet_00:
   title: How to quickly find the broken mod
   description: |-
-    Create a new empty folder `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\bin\x64\plugins\cyber_engine_tweaks\mods`.
-    Open the folder `mods_` and move half of the files and folders to `mods`.
+    - Go to your [Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)
+    - Create a new empty folder `bin\x64\plugins\cyber_engine_tweaks\mods`
+    - Open the folder `mods_` and move half of the files and folders to `mods`
     Does the game still start?
 
   options:
@@ -550,7 +551,8 @@ bisect_cet_00:
 bisect_cet_01:
   title: Finding the broken CET mod
   description: |-
-    The folder you need to examine is `[Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)\bin\x64\plugins\cyber_engine_tweaks\mods`.
+    Go to your [Cyberpunk 2077](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/users-modding-cyberpunk-2077/the-cyberpunk-2077-game-directory)
+    The folder you need to examine is `bin\x64\plugins\cyber_engine_tweaks\mods`.
     Proceed to the next step! (You have already completed item 1, so start at 2)
 
   options:

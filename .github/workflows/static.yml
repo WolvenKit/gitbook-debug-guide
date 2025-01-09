@@ -37,15 +37,15 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm -C widget install
+        run: pnpm -C web install
 
       - name: build
-        run: pnpm -C widget build
+        run: pnpm -C web build
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "widget/dist/"
+          path: "web/dist/"
 
   deploy:
     needs: build_site

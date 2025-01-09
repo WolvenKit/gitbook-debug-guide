@@ -1,7 +1,7 @@
 import { createMemo, For, Show } from "solid-js";
 import { SolidMarkdown } from "solid-markdown";
 import { Button } from "./Button";
-import type { Step } from "../../common/data";
+import type { Step } from "./lib/content";
 
 export interface StepPageProps {
   step: Step;
@@ -31,11 +31,14 @@ export function StepPage(props: StepPageProps) {
   });
 
   return (
-    <div>
+    <div class="container">
       <h1>{props.step.title}</h1>
 
       <Show when={props.step.description}>
-        <SolidMarkdown children={props.step.description} />
+        <SolidMarkdown
+          class="step-description"
+          children={props.step.description}
+        />
       </Show>
 
       <div class="button-list">

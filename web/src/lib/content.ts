@@ -1,4 +1,7 @@
+import contentRaw from "$content/guide.yaml";
 import YAML from "yaml";
+
+export const CONTENT = contentRaw as Content;
 
 export interface Step {
   title: string;
@@ -9,34 +12,9 @@ export interface Step {
 
 export type Content = Record<string, Step>;
 
-export const defaultContent = `# This YAML defines how Debug Guide behaves.
-# Define steps and options where the user can go next.
-# start is a required step, guide won't work without it:
-start:
-  title: What platform do you have the game from?
-  description: |- # You can use markdown here
-    This is an ***important*** information if you need help.
-  options:
-    - label: Steam
-      target: success # target is the next step
-    - label: Epic
-      target: success
-    - label: GoG
-      target: success
-    - label: Not allowed to say
-      target: pirate
-    - label: Other
-      target: pirate
-
-# These are final steps and have no options to go next
-success:
-  title: Game is good, yay!
-
-pirate:
-  title: "?rule3"
-`;
-
-export function loadContent(content: string): Content | string {
+// TODO: An editor/validator that would use this?
+/** Validates content and returns an error or undefined. */
+export function getContentError(content: string): string | undefined {
   let data: Content;
 
   try {
@@ -56,8 +34,6 @@ export function loadContent(content: string): Content | string {
     if (typeof e === "string") return e;
     throw e;
   }
-
-  return data;
 }
 
 function validateData(data: Content) {

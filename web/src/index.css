@@ -38,6 +38,15 @@ h1 {
   line-height: 1.1;
 }
 
+.container {
+  max-width: 80ch;
+}
+
+/* Fix lists lmao */
+.step-description * * {
+  text-align: left;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

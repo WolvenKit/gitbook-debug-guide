@@ -1,0 +1,19 @@
+{
+  "name": "gitbook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "dev": "gitbook dev MgwPytcJVspMKYpNoUaS",
+    "publish": "gitbook publish"
+  },
+  "dependencies": {
+    "@gitbook/runtime": "^0.17.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241230.0",
+    "@gitbook/cli": "^0.19.0",
+    "@gitbook/tsconfig": "^0.1.0"
+  }
+}

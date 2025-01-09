@@ -1,14 +1,42 @@
 # Guided Meditation
-A guiding system as an Integration in Gitbook.
 
+The missile knows where it is at all times. It knows this, because it has a debug guide!
+
+> "We have an [Expert System](https://en.wikipedia.org/wiki/Expert_system) at home!"  
+> The expert system in question:
+
+## Folders
+
+- `content/` - the knowledge base of the system
+- [`gitbook/` - GitBook integration](#gitbook-integration)
+- [`web/` - the main implementation](#web)
 
 ## Development
+
+This project uses `pnpm`, run `pnpm i` to install dependencies for all sub-projects.
+
+### GitBook Integration
+
+It's only purpose at the moment is to embed the web implementation 
+on GitBook.  
+Everything here is pre-configured to work with Red Modding Gitbook,
+one just has to auth to work on it (`pnpm gitbook auth`).
+
+#### Dev mode
 
 Run `pnpm dev` and GitBook will do some magic that will sync the project with the released version.
 Refreshing the browser seems to be manual though.
 
-## Releasing
+#### Releasing
 
 To release the integration to the org:
-0. make sure you're authed (`pnpm gitbook auth`)
+0. 
 1. run `pnpm run publish` (**NOT** ~~`pnpm publish`~~)
+
+### Web
+
+Web.
+
+#### Dev mode
+
+Run `pnpm dev`.

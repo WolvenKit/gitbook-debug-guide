@@ -1,23 +1,22 @@
 import { createSignal } from "solid-js";
-import contentRaw from "../guide.yaml";
-import { Content } from "../../common/data";
 import { Guide } from "./Guide";
-import { doClickActionState } from "../../common/action";
-
-const content = contentRaw as Content;
+import { doClickActionState } from "./lib/action";
+import { CONTENT } from "./lib/content";
 
 interface AppState {
   stepHistory: string[];
 }
 
 export function App() {
+  const initialStep = window.location.hash.slice(1) || "start";
+
   const [state, setState] = createSignal<AppState>({
-    stepHistory: ["start"],
+    stepHistory: [initialStep],
   });
 
   return (
     <Guide
-      content={content}
+      content={CONTENT}
       stepHistory={state().stepHistory}
       onAction={(step) => setState(doClickActionState(state(), { step }))}
     />

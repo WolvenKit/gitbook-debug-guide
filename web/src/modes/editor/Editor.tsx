@@ -25,13 +25,11 @@ export function Editor() {
 
   return (
     <div id="editor" class="full-window">
-      <div>
-        <CodeMirror
-          initialContent={content()}
-          onChange={setContent}
-          showStep={showStep()}
-        />
-      </div>
+      <CodeMirror
+        initialContent={content()}
+        onChange={setContent}
+        showStep={showStep()}
+      />
 
       <div class="full-window">
         <div class="toolbar">

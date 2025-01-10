@@ -1,5 +1,5 @@
 import { Step } from "$lib/content";
-import { ensureSyntaxTree, Language, syntaxTree } from "@codemirror/language";
+import { ensureSyntaxTree, syntaxTree } from "@codemirror/language";
 import { linter, Diagnostic } from "@codemirror/lint";
 
 type SyntaxNodeRef = Parameters<
@@ -146,11 +146,18 @@ export const customLinter = linter(
     tree.cursor().iterate(enter, leave);
 
     // Analyze steps
-    const stepKeys = new Set([...steps.keys()]);
-    console.log(stepKeys);
     for (const [key, step] of steps) {
+      if (!step.title) {
+        diagnostics.push({
+          from: step.keyNode.from,
+          to: step.keyNode.to,
+          severity: "error",
+          message: `Step '${key}' does not have a 'title'!`,
+        });
+      }
+
       for (const [target, optionNodes] of step.optionTargets) {
-        if (!stepKeys.has(target)) {
+        if (!steps.has(target)) {
           for (const optionNode of optionNodes) {
             diagnostics.push({
               from: optionNode.from,

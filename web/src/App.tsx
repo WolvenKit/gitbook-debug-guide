@@ -5,18 +5,24 @@ import { lazy, Match, Suspense, Switch } from "solid-js";
 const Editor = lazy(() =>
   import("./modes/editor/Editor").then((m) => ({ default: m.Editor }))
 );
+const Graph = lazy(() =>
+  import("./modes/graph/Graph").then((m) => ({ default: m.Graph }))
+);
 
 export function App() {
-  const editorMode = window.location.search.slice(1) == "editor";
+  const mode = window.location.search.slice(1);
   const initialStep = window.location.hash.slice(1);
 
   return (
-    <Switch fallback={<Guide content={CONTENT} initialStep={initialStep} />}>
-      <Match when={editorMode}>
-        <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<p>Loading...</p>}>
+      <Switch fallback={<Guide content={CONTENT} initialStep={initialStep} />}>
+        <Match when={mode == "editor"}>
           <Editor />
-        </Suspense>
-      </Match>
-    </Switch>
+        </Match>
+        <Match when={mode == "graph"}>
+          <Graph />
+        </Match>
+      </Switch>
+    </Suspense>
   );
 }

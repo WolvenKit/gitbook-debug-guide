@@ -1,7 +1,3 @@
-body {
-  overflow: hidden;
-}
-
 #editor {
   flex-grow: 1;
 
@@ -9,7 +5,17 @@ body {
   height: 100vh;
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#editor .toolbar {
+  background: #222;
+  padding: 0.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  position: relative;
+  z-index: 10;
 }
 
 .cm-editor {

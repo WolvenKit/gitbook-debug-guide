@@ -1,0 +1,11 @@
+#mermaid .node.default {
+  cursor: pointer;
+}
+
+#mermaid .node.default .label-container {
+  transition: fill 0.1s;
+}
+
+#mermaid .node.default:hover .label-container {
+  fill: #333;
+}

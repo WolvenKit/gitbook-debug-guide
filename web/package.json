@@ -16,7 +16,10 @@
     "@codemirror/state": "^6.5.1",
     "@codemirror/theme-one-dark": "github:codemirror/theme-one-dark",
     "@codemirror/view": "^6.36.2",
+    "@mermaid-js/layout-elk": "^0.1.7",
     "codemirror": "^6.0.1",
+    "mermaid": "^11.4.1",
+    "panzoom": "^9.4.3",
     "solid-js": "^1.9.4",
     "solid-markdown": "2.0.1",
     "yaml": "^2.7.0"

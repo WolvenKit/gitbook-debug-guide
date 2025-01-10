@@ -76,9 +76,9 @@ update_dependencies_start:
     - label: I want to reinstall the game now!
       target: mod_remover
     - label: OK!
-      target: update_dependencies_01
+      target: update_visualc
 
-update_dependencies_01:
+update_visualc:
   title: Update VisualC Redistributable
   description: |-
     - Download the latest VisualC Redistributable for 64-bit (x64) from [Microsoft](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170)
@@ -182,12 +182,14 @@ is_your_game_crashing:
   options:
     - label: Yes
       target: crashing_q_2
+    - label: No, and I just want this to work!
+      target: mod_remover
     - label: No
       target: misc_start
 
 crashing_q_2:
   title: When does the game crash?
-  description: We can tell what the problem is by
+  description: We can tell what the problem is by checking **when** the game crashes. Which of the following options describes your crash?
   options:
     - label: It doesn't even start
       target: crashing_cybercmd
@@ -233,18 +235,100 @@ crashing_cybercmd:
     - label: I don't have it
       target: crashing_errormsg
 
-
 crashing_errormsg:
   title: Do you see an error message?
   description: |-
-    Do you see this error message?
+    Do you see an error message, and does it contain... (please see options)
 
-    `could not move file from '<somewhere>' to 'C:\Path\to\Cyberpunk 2077\r6\cache\modded\tweakdb_ep1.bin'`
+    - label: No error message
+      target: crashing_red4ext_01
+    - label: Not listed
+      target: crashing_red4ext_01
+
+    - label: `could not move 'xxx' to '...\modded\tweakdb_ep1.bin'`
+      target: delete_the_cache
+    - label: Red4ext could not be loaded
+      target: update_visualc
+    - label: Redscript compilation failed
+      target: delete_the_cache
+    - label: XML document parsed with errors
+      target: crashing_xml_document_errors
+    - label: something about files
+      target: misc_something_something_files
+
+crashing_xml_document_errors:
+  title: XML document parsed with errors
+  description: |-
+    Does the error message mention the file `r6/config/inputUserMappings.xml`?
   options:
     - label: Yes
-      target: delete_the_cache
+      target: input_loader_error
+
+input_loader_error:
+  title: Input Loader
+  description: |-
+    This error is caused by [Input Loader](https://www.nexusmods.com/cyberpunk2077/mods/4575).
+  options:
+    - label: OK, what do I do now?
+      target: broken_mod
+
+crashing_xml_document_not_sure:
+  title: Unknown mod
+  description: |-
+    We're not sure which mod is the cause of your error, or if it's a base game problem.
+    Delete the offending file, and verify your game files.
+
+    Does the error go away?
+  options:
+    - label: Yes
+      target: success
+    - label: No, and I'm done with this shit
+      target: mod_remover
     - label: No
-      target: crashing_red4ext_01
+      target: is_your_game_crashing
+
+crashing_redscript_compilation_failed:
+  title: Redscript compilation failed
+  description: |-
+    You have **cleared your cache** and **verified files**, but the game is still crashing.
+    Let's try [updating redscript](https://www.nexusmods.com/cyberpunk2077/mods/1511).
+
+    Is your problem gone?
+
+    - label: Yes
+      target: success
+    - label: No
+      target: crashing_redscript_compilation_failed_02
+
+crashing_redscript_compilation_failed_02:
+  title: Redscript compilation failed
+  description: |-
+    Does the popup include a list of mods that cause the error?
+
+    - label: Yes
+      target: crashing_redscript_compilation_failed_03
+    - label: No
+      target: crashing_redscript_compilation_failed_04
+
+crashing_redscript_compilation_failed_03:
+  title: This is caused by errors in...
+  description: |-
+    The error names a number of mods. Let's check each of them - note them down.
+
+    - label: OK
+      target: broken_mod
+    - label: I already have
+      target: crashing_redscript_compilation_failed_04
+
+crashing_redscript_compilation_failed_04:
+  title: You can't get rid of the errors
+  description: |-
+    You verified everything that could be the problem, but the error doesn't go away. Here's what you can do now:
+
+    - label: Update the core mods
+      target: update_core_mods
+    - label: Nuke your mods and start over
+      target: mod_remover
 
 
 delete_the_cache:
@@ -259,6 +343,8 @@ delete_the_cache:
   options:
     - label: Yes
       target: success
+    - label: No (I have a redscript error)
+      target: crashing_redscript_compilation_failed
     - label: No
       target: crashing_q_2
 
@@ -280,7 +366,7 @@ crashing_red4ext_01:
     - label: Yes!
       target: success
     - label: No...
-      target: update_dependencies_01
+      target: update_visualc
 
 crashing_red4ext_02:
   title: Red4Ext is not working
@@ -696,6 +782,11 @@ bisect_found_the_mod:
     - label: That doesn't help!
       target: broken_mod
 
+
+# ================
+# found broken mod
+# ================
+
 broken_mod:
   title: A broken mod
   description: |-
@@ -721,6 +812,8 @@ outdated_mod:
   options:
     - label: read the fucking manual
       target: rtfm
+    - label: Actually, I have a redscript error
+      target: crashing_redscript_compilation_failed_03
     - label: I will play without it :(
       target: success_but_no
 
@@ -773,6 +866,16 @@ misc_q_02:
     - label: Yes
       target: misc_uninstall_sp0
     - label: Of course not!
+      target: misc_skip_loading_screen_question
+
+misc_skip_loading_screen_question:
+  title: Are you stuck in the loading screen?
+  description: |-
+    Are you stuck in the initial loading screen before the menu?
+  options:
+    - label: Yes
+      target: input_loader_error
+    - label: No
       target: unspecified_problem
 
 misc_uninstall_sp0:
@@ -789,6 +892,19 @@ misc_uninstall_sp0:
       target: unspecified_problem
     - label: I don't want to uninstall my cement tits!
       target: success_but_no
+
+misc_something_something_files:
+  title: You have a problem with file permissions
+  description: |-
+    Please check the [troubleshooting guide](https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/user-guide-troubleshooting#something-something-files), section "Something something files", and follow the instructions.
+
+    Does this make your problem go away?
+  options:
+    - label: yes
+      target: success
+    - label: no
+      target: crashing_errormsg
+
 
 misc_mod_not_working:
   title: An inactive mod

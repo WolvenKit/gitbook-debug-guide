@@ -9,14 +9,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "devalue": "^5.1.1",
-    "solid-js": "^1.9.3",
+    "@codemirror/commands": "^6.8.0",
+    "@codemirror/lang-yaml": "^6.1.2",
+    "@codemirror/language": "^6.10.8",
+    "@codemirror/lint": "^6.8.4",
+    "@codemirror/state": "^6.5.1",
+    "@codemirror/theme-one-dark": "github:codemirror/theme-one-dark",
+    "@codemirror/view": "^6.36.2",
+    "codemirror": "^6.0.1",
+    "solid-js": "^1.9.4",
     "solid-markdown": "2.0.1",
     "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
-    "typescript": "~5.7.2",
+    "devalue": "^5.1.1",
+    "typescript": "^5.7.3",
     "vite": "^6.0.7",
     "vite-plugin-solid": "^2.11.0"
   }

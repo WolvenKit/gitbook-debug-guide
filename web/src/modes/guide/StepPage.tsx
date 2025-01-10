@@ -1,7 +1,8 @@
 import { createMemo, For, Show } from "solid-js";
 import { SolidMarkdown } from "solid-markdown";
-import { Button } from "./Button";
-import type { Step } from "./lib/content";
+import { Button } from "$components/Button";
+import type { Step } from "$lib/content";
+import { BACK_STEP, RESTART_STEP } from "./guide";
 
 export interface StepPageProps {
   step: Step;
@@ -16,14 +17,14 @@ export function StepPage(props: StepPageProps) {
     if (options.length && props.showBack) {
       options.push({
         label: "Go back",
-        target: "_back",
+        target: BACK_STEP,
       });
     }
 
     if (!options.length) {
       options.push({
         label: "Restart...",
-        target: "_restart",
+        target: RESTART_STEP,
       });
     }
 
@@ -31,7 +32,7 @@ export function StepPage(props: StepPageProps) {
   });
 
   return (
-    <div class="container">
+    <div id="guide" class="container">
       <h1>{props.step.title}</h1>
 
       <Show when={props.step.description}>

@@ -1,0 +1,10 @@
+#guide {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Fix lists lmao */
+.step-description * * {
+  text-align: left;
+}

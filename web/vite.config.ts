@@ -22,6 +22,8 @@ export default defineConfig({
   resolve: {
     alias: {
       $content: Path.resolve("../content"),
+      $components: Path.resolve("./src/components"),
+      $lib: Path.resolve("./src/lib"),
     },
   },
   server: {

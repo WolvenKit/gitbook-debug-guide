@@ -50,6 +50,9 @@ importers:
       '@mermaid-js/layout-elk':
         specifier: ^0.1.7
         version: 0.1.7(mermaid@11.4.1)
+      '@solid-primitives/scheduled':
+        specifier: ^1.4.4
+        version: 1.4.4(solid-js@1.9.4)
       codemirror:
         specifier: ^6.0.1
         version: 6.0.1
@@ -786,6 +789,11 @@ packages:
     resolution: {integrity: sha512-D6qjsXGcvhTjv0kI4fU8tUuBDF/Ueee4SVX79VfNDXZa64TfCW1Slkb6Z7O1p7vflqZjcmOVdZlqf8gvJxc6og==}
     cpu: [x64]
     os: [win32]
+
+  '@solid-primitives/scheduled@1.4.4':
+    resolution: {integrity: sha512-BTGdFP7t+s7RSak+s1u0eTix4lHP23MrbGkgQTFlt1E+4fmnD/bEx3ZfNW7Grylz3GXgKyXrgDKA7jQ/wuWKgA==}
+    peerDependencies:
+      solid-js: ^1.6.12
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -2743,6 +2751,10 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.30.1':
     optional: true
+
+  '@solid-primitives/scheduled@1.4.4(solid-js@1.9.4)':
+    dependencies:
+      solid-js: 1.9.4
 
   '@types/babel__core@7.20.5':
     dependencies:

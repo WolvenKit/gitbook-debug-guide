@@ -37,6 +37,21 @@ export const customLinter = linter(
       steps.set(key, currentStep);
     };
 
+    const checkAttribute = (key: string, node: SyntaxNodeRef) => {
+      if (!currentStep) throw new Error("No step at depth 2");
+      if (!ALLOWED_ATTRIBUTES.has(key as any)) {
+        diagnostics.push({
+          from: node.from,
+          to: node.to,
+          severity: "warning",
+          message: `Unknown step attribute '${key}'.`,
+        });
+      }
+
+      currentStep[key as keyof Step] = true;
+      if (key == "options") inOptions = true;
+    };
+
     function enter(node: SyntaxNodeRef) {
       // Syntax error
       if (node.type.isError) {
@@ -65,18 +80,7 @@ export const customLinter = linter(
 
             // Step attributes
             case 2:
-              if (!currentStep) throw new Error("No step at depth 2");
-              if (!ALLOWED_ATTRIBUTES.has(key as any)) {
-                diagnostics.push({
-                  from: node.from,
-                  to: node.to,
-                  severity: "warning",
-                  message: `Unknown step attribute '${key}'.`,
-                });
-              }
-
-              currentStep[key as keyof Step] = true;
-              if (key == "options") inOptions = true;
+              checkAttribute(key, node);
               break;
 
             case 3:
@@ -88,8 +92,10 @@ export const customLinter = linter(
 
             case 4:
               // NOTE: Self-correction
+              depth = 1;
               if (lastKey) startStep(getString(lastKey), lastKey);
               depth = 2;
+              checkAttribute(key, node);
           }
           lastKey = node.node;
           break;

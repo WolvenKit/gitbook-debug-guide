@@ -1,9 +1,5 @@
 import { createResource, onMount, onCleanup, createMemo } from "solid-js";
-import {
-  createScheduled,
-  debounce,
-  throttle,
-} from "@solid-primitives/scheduled";
+import { createScheduled, debounce } from "@solid-primitives/scheduled";
 import mermaid from "mermaid";
 import elkLayouts from "@mermaid-js/layout-elk";
 import panzoom, { PanZoom } from "panzoom";

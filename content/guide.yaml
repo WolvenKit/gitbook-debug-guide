@@ -456,7 +456,7 @@ crashing_script_mod_start:
 crashing_random_start:
   title: Do you have Material Texture Override installed?
   description: |-
-    Do you have the mod Material Texture Override installed?
+    Do you have the mod [Material Texture Override](https://www.nexusmods.com/cyberpunk2077/mods/5266) installed?
 
   options:
     - label: Yes
@@ -465,26 +465,16 @@ crashing_random_start:
       target: crashing_random_01
 
 crashing_random_01:
-  title: Do you have Material Texture Override installed?
+  title: ... in the inventory?
   description: |-
-    Do you have the mod [Material Texture Override](https://www.nexusmods.com/cyberpunk2077/mods/5266) installed?
+    Do you crash while managing your inventory?
 
   options:
     - label: Yes
-      target: crashing_random_mto
+      target: crashing_random_crowd_scanner_q
     - label: No
-      target: crashing_random_02
+      target: crashing_random_03
 
-crashing_random_02:
-  title: Do you have Material Texture Override installed?
-  description: |-
-    Do you have the mod [Material Texture Override](https://www.nexusmods.com/cyberpunk2077/mods/5266) installed?
-
-  options:
-    - label: Yes
-      target: crashing_random_mto
-    - label: No
-      target: crashing_random_02
 
 crashing_random_03:
   title: We can't narrow down the problem
@@ -508,6 +498,31 @@ crashing_random_mto:
       target: success
     - label: It's still there
       target: crashing_random_03
+
+crashing_random_crowd_scanner_q:
+  title: Do you have these mods installed?
+  description: |-
+    Do you have these mods installed?
+    - [Kiroshi Opticals](https://www.nexusmods.com/cyberpunk2077/mods/1654)
+    - [Tooltips Fixer](https://www.nexusmods.com/cyberpunk2077/mods/8560)
+
+  options:
+    - label: Yes
+      target: crashing_random_crowd_scanner_a
+    - label: No
+      target: crashing_random_03
+
+crashing_random_crowd_scanner_a:
+  title: Uninstall either or both of those mods
+  description: |-
+    These two mods do not play nice with each other — try uninstalling one or both.
+    Does this resolve your problem?
+  options:
+    - label: Yes!
+      target: success
+    - label: No
+      target: crashing_random_03
+
 
 # ================
 # crashing: CET

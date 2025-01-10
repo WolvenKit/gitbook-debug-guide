@@ -315,6 +315,7 @@ crashing_redscript_compilation_failed_03:
   description: |-
     The error names a number of mods. Let's check each of them - note them down.
 
+  options:
     - label: OK
       target: broken_mod
     - label: I already have

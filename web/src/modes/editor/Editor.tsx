@@ -7,12 +7,13 @@ import {
   Suspense,
   createMemo,
 } from "solid-js";
-import YAML from "yaml";
 import { contentToMermaid } from "../graph/mermaid";
 import { Button } from "$components/Button";
+import { download } from "./util";
+import { createScheduled, debounce } from "@solid-primitives/scheduled";
+import { Content, CONTENT } from "$lib/content";
 
 import "./editor.css";
-import { download } from "./util";
 
 const Mermaid = lazy(() =>
   import("../graph/Mermaid").then((m) => ({ default: m.Mermaid }))
@@ -20,20 +21,38 @@ const Mermaid = lazy(() =>
 
 export function Editor() {
   const [showStep, setShowStep] = createSignal<string>();
-  const [content, setContent] = createSignal(contentRaw);
-  const mermaid = createMemo(() => contentToMermaid(YAML.parse(content())));
+  const [content, setContent] = createSignal(CONTENT);
+
+  let rawContent = contentRaw;
+
+  // Update mermaid with a debounce
+  const scheduled = createScheduled((fn) => debounce(fn, 1000));
+  const deferredContent = createMemo<Content>((p) => {
+    const value = content();
+    return scheduled() ? value : p;
+  }, content());
+
+  const mermaid = createMemo<string>((last) => {
+    try {
+      return contentToMermaid(deferredContent());
+    } catch (e) {
+      if (import.meta.env.DEV) console.error(e);
+      return last;
+    }
+  }, "");
 
   return (
     <div id="editor" class="full-window">
       <CodeMirror
-        initialContent={content()}
-        onChange={setContent}
+        initialContent={contentRaw}
+        onChange={(c) => (rawContent = c)}
+        onParsed={setContent}
         showStep={showStep()}
       />
 
       <div class="full-window">
         <div class="toolbar">
-          <Button onClick={() => download("guide.yaml", content())}>
+          <Button onClick={() => download("guide.yaml", rawContent)}>
             Download YAML
           </Button>
           <Button

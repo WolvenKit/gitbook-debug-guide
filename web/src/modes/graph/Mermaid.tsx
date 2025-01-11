@@ -1,5 +1,4 @@
-import { createResource, onMount, onCleanup, createMemo } from "solid-js";
-import { createScheduled, debounce } from "@solid-primitives/scheduled";
+import { createResource, onMount, onCleanup } from "solid-js";
 import mermaid from "mermaid";
 import elkLayouts from "@mermaid-js/layout-elk";
 import panzoom, { PanZoom } from "panzoom";
@@ -23,17 +22,13 @@ export interface MermaidProps {
 }
 
 export function Mermaid(props: MermaidProps) {
-  const scheduled = createScheduled((fn) => debounce(fn, 1000));
-
-  const deferredContent = createMemo<string>((p) => {
-    const value = props.content;
-    return scheduled() ? value : p;
-  }, props.content);
-
-  const [svg] = createResource(deferredContent, async (content) => {
-    const { svg } = await mermaid.render("mermaid", content);
-    return svg;
-  });
+  const [svg] = createResource(
+    () => props.content,
+    async (content) => {
+      const { svg } = await mermaid.render("mermaid", content);
+      return svg;
+    }
+  );
 
   let element: HTMLDivElement | undefined = undefined;
   let controls: PanZoom;

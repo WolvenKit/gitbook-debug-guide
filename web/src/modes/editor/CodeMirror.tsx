@@ -11,6 +11,7 @@ export interface CodeMirrorProps {
   initialContent?: string;
   showStep?: string;
   onChange?: (content: string) => void;
+  onParsed?: (content: unknown) => void;
 }
 
 export function CodeMirror(props: CodeMirrorProps) {
@@ -20,7 +21,7 @@ export function CodeMirror(props: CodeMirrorProps) {
       basicSetup,
       oneDark,
       yaml(),
-      customLinter,
+      customLinter((c) => props.onParsed?.(c[0])),
       lintGutter(),
       keymap.of([indentWithTab]),
       ViewPlugin.define((view) => ({

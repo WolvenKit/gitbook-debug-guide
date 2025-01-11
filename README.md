@@ -11,6 +11,13 @@ The missile knows where it is at all times. It knows this, because it has a debu
 - [`gitbook/` - GitBook integration](#gitbook-integration)
 - [`web/` - the main implementation](#web)
 
+## Deployment
+
+> TODO: A guide + separate the content yaml from the code
+
+You're more than welcome to fork this project for your own use.
+This repository is setup to be automatically deployed to GitHub Pages for every change made on the main branch.
+
 ## Development
 
 This project uses `pnpm`, run `pnpm i` to install dependencies for all sub-projects.
@@ -30,7 +37,7 @@ Refreshing the browser seems to be manual though.
 #### Releasing
 
 To release the integration to the org:
-0. 
+
 1. run `pnpm run publish` (**NOT** ~~`pnpm publish`~~)
 
 ### Web

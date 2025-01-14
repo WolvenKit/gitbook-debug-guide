@@ -1,9 +1,25 @@
+import { cl } from "$lib/utils";
+import { JSX, splitProps } from "solid-js";
 import { ParentProps } from "solid-js/types/server/rendering.js";
 
-interface ButtonProps {
+interface ButtonProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
 }
 
-export function Button(props: ParentProps<ButtonProps>) {
-  return <button onClick={props.onClick}>{props.children}</button>;
+export function Button(allProps: ParentProps<ButtonProps>) {
+  const [props, restProps] = splitProps(allProps, [
+    "children",
+    "onClick",
+    "class",
+  ]);
+
+  return (
+    <button
+      onClick={props.onClick}
+      class={cl("button", props.class)}
+      {...restProps}
+    >
+      {props.children}
+    </button>
+  );
 }

@@ -1,6 +1,8 @@
 import contentRaw from "$content/guide.yaml";
+import settingsRaw from "$content/settings.yaml";
 
 export const CONTENT = contentRaw as Content;
+export const SETTINGS = settingsRaw as Settings;
 
 export interface Step {
   title: string;
@@ -10,3 +12,7 @@ export interface Step {
 }
 
 export type Content = Record<string, Step>;
+
+export interface Settings {
+  bottom_buttons: { label: string; target: string }[];
+}

@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=_schemas/settings.schema.json
+---
+bottom_buttons:
+  - label: Clean install instructions
+    target: mod_remover

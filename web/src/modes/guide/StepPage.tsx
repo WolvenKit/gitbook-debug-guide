@@ -2,24 +2,17 @@ import { createMemo, For, Show } from "solid-js";
 import { SolidMarkdown } from "solid-markdown";
 import { Button } from "$components/Button";
 import type { Step } from "$lib/content";
-import { BACK_STEP, RESTART_STEP } from "./guide";
+import { RESTART_STEP } from "./guide";
 
 export interface StepPageProps {
   step: Step;
-  showBack: boolean;
   onAction?: (target: string) => void;
+  hidden?: boolean;
 }
 
 export function StepPage(props: StepPageProps) {
   const options = createMemo(() => {
     const options = [...(props.step.options ?? [])];
-
-    if (options.length && props.showBack) {
-      options.push({
-        label: "Go back",
-        target: BACK_STEP,
-      });
-    }
 
     if (!options.length) {
       options.push({
@@ -32,7 +25,11 @@ export function StepPage(props: StepPageProps) {
   });
 
   return (
-    <div id="guide" class="container">
+    <div
+      id="guide"
+      classList={{ container: true, hidden: props.hidden }}
+      inert={props.hidden}
+    >
       <h1>{props.step.title}</h1>
 
       <Show when={props.step.description}>
@@ -44,8 +41,11 @@ export function StepPage(props: StepPageProps) {
 
       <div class="button-list">
         <For each={options()}>
-          {(option) => (
-            <Button onClick={() => props.onAction?.(option.target)}>
+          {(option, i) => (
+            <Button
+              style={{ "--index": i() }}
+              onClick={() => props.onAction?.(option.target)}
+            >
               {option.label}
             </Button>
           )}

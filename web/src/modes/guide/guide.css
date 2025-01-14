@@ -1,10 +1,60 @@
+#guide-wrapper {
+  display: grid;
+}
+
 #guide {
+  grid-row-start: 1;
+  grid-column-start: 1;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  flex-grow: 1;
+  transition: 0.3s opacity;
+  animation: fade-in 0.3s;
+}
+#guide.hidden {
+  opacity: 0;
+}
+
+.button-list > button {
+  animation: fade-in 0.3s both;
+  animation-delay: calc(var(--index) * 0.1s);
 }
 
 /* Fix lists lmao */
 .step-description * * {
   text-align: left;
+}
+
+.button-list {
+  display: inline-grid;
+  gap: 0.5rem;
+  margin: auto 0;
+}
+
+#top-bar {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: 100ch;
+  padding: 0.25rem;
+}
+
+#bottom-bar {
+  background: #0008;
+
+  margin-top: auto;
+  /* position: sticky; */
+  bottom: 0;
+
+  display: flex;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
 }

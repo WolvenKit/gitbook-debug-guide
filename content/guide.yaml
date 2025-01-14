@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=_schemas/guide.schema.json
+---
 # This YAML defines how Debug Guide behaves.
 # Define steps and options where the user can go next.
 # start is a required step, guide won't work without it:
@@ -331,7 +333,6 @@ crashing_redscript_compilation_failed_04:
     - label: Nuke your mods and start over
       target: mod_remover
 
-
 delete_the_cache:
   title: Delete the cache and verify your game files
   description: |-
@@ -348,7 +349,6 @@ delete_the_cache:
       target: crashing_redscript_compilation_failed
     - label: No
       target: crashing_q_2
-
 
 crashing_red4ext_01:
   title: Red4Ext is not working
@@ -475,7 +475,6 @@ crashing_random_01:
     - label: No
       target: crashing_random_03
 
-
 crashing_random_03:
   title: We can't narrow down the problem
   description: |-
@@ -522,7 +521,6 @@ crashing_random_crowd_scanner_a:
       target: success
     - label: No
       target: crashing_random_03
-
 
 # ================
 # crashing: CET
@@ -798,7 +796,6 @@ bisect_found_the_mod:
     - label: That doesn't help!
       target: broken_mod
 
-
 # ================
 # found broken mod
 # ================
@@ -920,7 +917,6 @@ misc_something_something_files:
       target: success
     - label: no
       target: crashing_errormsg
-
 
 misc_mod_not_working:
   title: An inactive mod

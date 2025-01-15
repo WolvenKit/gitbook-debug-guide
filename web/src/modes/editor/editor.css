@@ -24,3 +24,12 @@
   overflow: auto;
   scrollbar: overlay;
 }
+
+.cm-panel.cm-panel-lint ul [aria-selected].cm-diagnostic-warning {
+  color: #111;
+}
+
+.ͼ1 .cm-lintRange-active {
+  background-color: #ffdd9940;
+  color: #fff;
+}

@@ -259,6 +259,7 @@ crashing_errormsg:
   description: |-
     Do you see an error message, and does it contain... (please see options)
 
+  options:
     - label: No error message
       target: crashing_red4ext_01
     - label: Not listed

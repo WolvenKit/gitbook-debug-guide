@@ -173,7 +173,24 @@ update_dependencies_06:
     - label: Yes
       target: success
     - label: No
-      target: update_dependencies_06
+      target: uptodate_q_1
+    - label: For NVIDIA user
+      target: update_dependencies_NVIDIA
+
+update_dependencies_NVIDIA:
+  title: Try rolling back your driver version
+  description: |-
+    NVIDIA sometimes introduces issues with their drivers that cause the game to crash. 
+    Repeat the instructions from the previous step, but install one of these drivers
+    - [NVIDIA GeForce Driver Version 556.45 Hotfix](https://international-gfe.download.nvidia.com/Windows/566.45hf/566.45-desktop-notebook-win10-win11-64bit-international-dch.hf1.exe)
+    - [NVIDIA GeForce Driver Version 556.36 WHQL](https://us.download.nvidia.com/Windows/566.36/566.36-desktop-win10-win11-64bit-international-dch-whql.exe)
+    Does your game start now?
+
+  options:
+    - label: Yes
+      target: success
+    - label: No
+      target: uptodate_q_1
 
 # ================
 # crashing

@@ -180,7 +180,7 @@ update_dependencies_06:
 update_dependencies_NVIDIA:
   title: Try rolling back your driver version
   description: |-
-    NVIDIA sometimes introduces issues with their drivers that cause the game to crash. 
+    NVIDIA sometimes introduces issues with their drivers that cause the game to crash.
     Repeat the instructions from the previous step, but install one of these drivers
     - [NVIDIA GeForce Driver Version 556.45 Hotfix](https://international-gfe.download.nvidia.com/Windows/566.45hf/566.45-desktop-notebook-win10-win11-64bit-international-dch.hf1.exe)
     - [NVIDIA GeForce Driver Version 556.36 WHQL](https://us.download.nvidia.com/Windows/566.36/566.36-desktop-win10-win11-64bit-international-dch-whql.exe)
@@ -265,7 +265,7 @@ crashing_errormsg:
     - label: Not listed
       target: crashing_red4ext_01
 
-    - label: `could not move 'xxx' to '...\modded\tweakdb_ep1.bin'`
+    - label: "`could not move 'xxx' to '...\\modded\\tweakdb_ep1.bin'`"
       target: delete_the_cache
     - label: Red4ext could not be loaded
       target: update_visualc
@@ -315,6 +315,7 @@ crashing_redscript_compilation_failed:
 
     Is your problem gone?
 
+  options:
     - label: Yes
       target: success
     - label: No
@@ -325,6 +326,7 @@ crashing_redscript_compilation_failed_02:
   description: |-
     Does the popup include a list of mods that cause the error?
 
+  options:
     - label: Yes
       target: crashing_redscript_compilation_failed_03
     - label: No
@@ -346,6 +348,7 @@ crashing_redscript_compilation_failed_04:
   description: |-
     You verified everything that could be the problem, but the error doesn't go away. Here's what you can do now:
 
+  options:
     - label: Update the core mods
       target: update_core_mods
     - label: Nuke your mods and start over

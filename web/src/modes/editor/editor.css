@@ -25,7 +25,7 @@
   scrollbar: overlay;
 }
 
-.cm-panel.cm-panel-lint ul [aria-selected].cm-diagnostic-warning {
+.cm-panel.cm-panel-lint ul [aria-selected] {
   color: #111;
 }
 

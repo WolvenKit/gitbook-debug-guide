@@ -9,11 +9,11 @@
     "publish": "gitbook publish"
   },
   "dependencies": {
-    "@gitbook/runtime": "^0.17.0"
+    "@gitbook/runtime": "^0.20.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241230.0",
-    "@gitbook/cli": "^0.19.0",
+    "@cloudflare/workers-types": "^4.20250427.0",
+    "@gitbook/cli": "^0.22.0",
     "@gitbook/tsconfig": "^0.1.0"
   }
 }

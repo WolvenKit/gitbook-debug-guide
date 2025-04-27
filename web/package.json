@@ -9,27 +9,27 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@codemirror/commands": "^6.8.0",
+    "@codemirror/commands": "^6.8.1",
     "@codemirror/lang-yaml": "^6.1.2",
-    "@codemirror/language": "^6.10.8",
-    "@codemirror/lint": "^6.8.4",
-    "@codemirror/state": "^6.5.1",
-    "@codemirror/theme-one-dark": "github:codemirror/theme-one-dark",
-    "@codemirror/view": "^6.36.2",
+    "@codemirror/language": "^6.11.0",
+    "@codemirror/lint": "^6.8.5",
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/theme-one-dark": "^6.1.2",
+    "@codemirror/view": "^6.36.6",
     "@mermaid-js/layout-elk": "^0.1.7",
-    "@solid-primitives/scheduled": "^1.4.4",
+    "@solid-primitives/scheduled": "^1.5.1",
     "codemirror": "^6.0.1",
-    "mermaid": "^11.4.1",
+    "mermaid": "^11.6.0",
     "panzoom": "^9.4.3",
-    "solid-js": "^1.9.4",
-    "solid-markdown": "2.0.1",
-    "yaml": "^2.7.0"
+    "solid-js": "^1.9.5",
+    "solid-markdown": "2.0.14",
+    "yaml": "^2.7.1"
   },
   "devDependencies": {
-    "@types/node": "^22.10.5",
+    "@types/node": "^22.15.2",
     "devalue": "^5.1.1",
-    "typescript": "^5.7.3",
-    "vite": "^6.0.7",
-    "vite-plugin-solid": "^2.11.0"
+    "typescript": "^5.8.3",
+    "vite": "^6.3.3",
+    "vite-plugin-solid": "^2.11.6"
   }
 }

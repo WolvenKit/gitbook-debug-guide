@@ -57,13 +57,15 @@ export function Guide(props: GuideProps) {
       </div>
 
       <div id="guide-wrapper">
-        <For each={stepHistory().slice(-2)} >
+        <For each={stepHistory().slice(-2)}>
           {(stepName, i) => (
-            <StepPage
-              step={props.content[stepName]}
-              onAction={goTo}
-              hidden={!i() && historyLength() != 1}
-            />
+            <Show when={historyLength()} keyed>
+              <StepPage
+                step={props.content[stepName]}
+                onAction={goTo}
+                hidden={!i() && historyLength() != 1}
+              />
+            </Show>
           )}
         </For>
       </div>

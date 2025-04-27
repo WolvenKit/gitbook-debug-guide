@@ -32,11 +32,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: [
-      // Because of solid-markdown
-      "micromark",
-      "unified",
-    ],
+    include: ["solid-markdown > micromark", "solid-markdown > unified"],
   },
   // To make all import paths relative in build
   base: "",
